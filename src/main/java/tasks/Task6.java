@@ -4,8 +4,8 @@ import common.Area;
 import common.Person;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /*
@@ -20,13 +20,16 @@ public class Task6 {
   public static Set<String> getPersonDescriptions(Collection<Person> persons,
                                                   Map<Integer, Set<Integer>> personAreaIds,
                                                   Collection<Area> areas) {
-    Map<Integer, String> areaNamesById = areas.stream()
-            .collect(Collectors.toMap(Area::getId, Area::getName));
+    Map<Integer, Area> areaNamesById = areas.stream()
+            .collect(Collectors.toMap(Area::getId, Function.identity()));
     return persons.stream()
-            .filter(Objects::nonNull)
             .flatMap(person-> personAreaIds.get(person.getId()).stream()
-                    .map(areaId -> String.join(" - ", person.getFirstName(), areaNamesById.get(areaId)))
+                    .map(areaId -> getPersonDescription(person, areaNamesById.get(areaId)))
             )
             .collect(Collectors.toSet());
   }
+
+    private static String getPersonDescription(Person person, Area area) {
+        return String.join(" - ", person.getFirstName(), area.getName());
+    }
 }

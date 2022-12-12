@@ -31,6 +31,24 @@ public class Task3Test {
   }
 
   @Test
+  public void sortSuccessWhenFistNameIsNull() {
+    person4.setFirstName(null);
+    assertEquals(List.of(person4, person1, person3, person2), Task3.sort(List.of(person1, person2, person3, person4)));
+  }
+
+  @Test
+  public void sortSuccessWhenSecondNameIsNull() {
+    person3.setSecondName(null);
+    assertEquals(List.of(person3, person1, person4, person2), Task3.sort(List.of(person1, person2, person3, person4)));
+  }
+
+  @Test
+  public void sortSuccessWhenCreateAtIsNull() {
+    person4.setCreatedAt(null);
+    assertEquals(List.of(person4, person1, person3, person2), Task3.sort(List.of(person1, person2, person3, person4)));
+  }
+
+  @Test
   public void testEmpty() {
     assertEquals(Collections.emptyList(), Task3.sort(Collections.emptyList()));
   }

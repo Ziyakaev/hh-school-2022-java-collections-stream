@@ -5,7 +5,6 @@ import common.Person;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,7 +20,6 @@ public class Task2 {
                                                      Collection<Person> persons2,
                                                      int limit) {
     return Stream.of(persons1, persons2)
-            .filter(Objects::nonNull)
             .flatMap(Collection::stream)
             .sorted(Comparator.comparing(Person::getCreatedAt))
             .limit(limit)

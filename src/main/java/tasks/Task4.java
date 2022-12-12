@@ -4,7 +4,6 @@ import common.ApiPersonDto;
 import common.Person;
 import common.PersonConverter;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 /*
@@ -24,7 +23,6 @@ public class Task4 {
 
   public List<ApiPersonDto> convert(List<Person> persons) {
     return persons.stream()
-            .filter(Objects::nonNull)
             .map(personConverter::convert)
             .collect(Collectors.toList());
   }
